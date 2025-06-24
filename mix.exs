@@ -19,7 +19,7 @@ defmodule RabbitMq.MixProject do
   def application do
     [
       mod: {RabbitMq.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [:logger, :runtime_tools, :amqp]
     ]
   end
 
@@ -52,7 +52,6 @@ defmodule RabbitMq.MixProject do
       {:jason, "~> 1.2"},
       {:plug_cowboy, "~> 2.5"},
       {:amqp, "~> 3.3.2"}
-
     ]
   end
 

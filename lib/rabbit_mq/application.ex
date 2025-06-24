@@ -17,7 +17,9 @@ defmodule RabbitMq.Application do
       # Start Finch
       {Finch, name: RabbitMq.Finch},
       # Start the Endpoint (http/https)
-      RabbitMqWeb.Endpoint
+      RabbitMqWeb.Endpoint,
+      {RabbitMq.RabbitmqConnection, []}
+
       # Start a worker by calling: RabbitMq.Worker.start_link(arg)
       # {RabbitMq.Worker, arg}
     ]
