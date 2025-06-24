@@ -8,9 +8,18 @@ defmodule RabbitMq.RabbitmqConnection do
     GenServer.start_link(__MODULE__, opts, name: __MODULE__)
   end
 
+  def get_connection do
+    GenServer.call(__MODULE__, :get_connection)
+  end
+
   @impl true
   def init(_opts) do
     {:ok, nil, {:continue, :connect}}
+  end
+
+  @impl true
+  def handle_call(:get_connection, _from, connection) do
+    {:reply, {:ok, connection}, connection}
   end
 
   @impl true
@@ -38,9 +47,9 @@ defmodule RabbitMq.RabbitmqConnection do
 
   @impl true
   def handle_info(:check_connection, connection) do
-    Logger.debug(
-      "==========called to check connection: Connection is #{if Process.alive?(connection.pid), do: "alive", else: "dead"}==========="
-    )
+    # Logger.debug(
+    #   "==========called to check connection: Connection is #{if Process.alive?(connection.pid), do: "alive", else: "dead"}==========="
+    # )
 
     schedule_connection_check()
 
